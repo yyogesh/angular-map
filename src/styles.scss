@@ -1,1 +1,113 @@
-/* You can add global styles to this file, and also import other style files */
+@use './styles/variables' as var;
+@use './styles/mixins' as mix;
+@use './styles/breakpoints' as bp;
+
+// Reset and base styles
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var.$font-family;
+  font-size: var.$font-size-normal;
+  color: #333;
+  background-color: var.$background-color;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Global layout
+.app-container {
+  display: flex;
+  height: 100%;
+  position: relative;
+}
+
+.content-container {
+  flex: 1;
+  overflow-x: hidden;
+  transition: margin-left 0.3s ease;
+  
+  @include bp.respond-from(md) {
+    margin-left: var.$sidebar-width;
+  }
+}
+
+.sidebar-open .content-container {
+  @include bp.respond-to(xs) {
+    margin-left: var.$sidebar-width;
+  }
+}
+
+// Card styles
+.card {
+  @include mix.card;
+  margin-bottom: var.$spacing-md;
+}
+
+// Status colors
+.status-red {
+  color: var.$status-red;
+}
+
+.status-purple {
+  color: var.$status-purple;
+}
+
+.status-blue {
+  color: var.$status-blue;
+}
+
+// Utility classes
+.text-truncate {
+  @include mix.text-truncate;
+}
+
+.flex-center {
+  @include mix.flex-center;
+}
+
+.flex-between {
+  @include mix.flex-between;
+}
+
+.flex-column {
+  @include mix.flex-column;
+}
+
+// Map container
+.map-container {
+  width: 100%;
+  height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  
+  @include bp.respond-from(md) {
+    height: 500px;
+  }
+}
+
+// Outage list
+.outage-list {
+  .outage-item {
+    @include mix.flex-between;
+    padding: var.$spacing-md;
+    border-bottom: 1px solid var.$border-color;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+// Charts
+.chart-container {
+  height: 300px;
+  margin-bottom: var.$spacing-lg;
+}

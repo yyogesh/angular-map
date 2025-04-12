@@ -1,6 +1,6 @@
-@use './styles/variables' as var;
-@use './styles/mixins' as mix;
-@use './styles/breakpoints' as bp;
+@use './styles/variables' as v;
+@use './styles/mixins' as m;
+@use './styles/breakpoints' as b;
 
 // Reset and base styles
 * {
@@ -11,10 +11,10 @@
 
 html, body {
   height: 100%;
-  font-family: var.$font-family;
-  font-size: var.$font-size-normal;
+  font-family: v.$font-family;
+  font-size: v.$font-size-normal;
   color: #333;
-  background-color: var.$background-color;
+  background-color: v.$background-color;
 }
 
 a {
@@ -32,76 +32,92 @@ a {
 .content-container {
   flex: 1;
   overflow-x: hidden;
+  background-color: v.$background-color;
   transition: margin-left 0.3s ease;
   
-  @include bp.respond-from(md) {
-    margin-left: var.$sidebar-width;
+  @include b.respond-from(md) {
+    margin-left: v.$sidebar-width;
   }
-}
-
-.sidebar-open .content-container {
-  @include bp.respond-to(xs) {
-    margin-left: var.$sidebar-width;
+  
+  &.sidebar-collapsed {
+    @include b.respond-from(md) {
+      margin-left: v.$sidebar-icon-width;
+    }
   }
 }
 
 // Card styles
 .card {
-  @include mix.card;
-  margin-bottom: var.$spacing-md;
+  @include m.card;
+  margin-bottom: v.$spacing-md;
 }
 
 // Status colors
 .status-red {
-  color: var.$status-red;
+  color: v.$status-red;
 }
 
 .status-purple {
-  color: var.$status-purple;
+  color: v.$status-purple;
 }
 
 .status-blue {
-  color: var.$status-blue;
+  color: v.$status-blue;
+}
+
+.status-green {
+  color: v.$status-green;
 }
 
 // Utility classes
 .text-truncate {
-  @include mix.text-truncate;
+  @include m.text-truncate;
 }
 
 .flex-center {
-  @include mix.flex-center;
+  @include m.flex-center;
 }
 
 .flex-between {
-  @include mix.flex-between;
+  @include m.flex-between;
 }
 
 .flex-column {
-  @include mix.flex-column;
+  @include m.flex-column;
 }
 
 // Map container
 .map-container {
   width: 100%;
-  height: 400px;
+  height: 300px;
   border-radius: 8px;
   overflow: hidden;
   
-  @include bp.respond-from(md) {
-    height: 500px;
+  @include b.respond-from(md) {
+    height: 400px;
   }
 }
 
 // Outage list
 .outage-list {
   .outage-item {
-    @include mix.flex-between;
-    padding: var.$spacing-md;
-    border-bottom: 1px solid var.$border-color;
+    @include m.flex-between;
+    padding: v.$spacing-md;
+    border-left: 4px solid;
+    margin-bottom: v.$spacing-sm;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 4px;
     
-    &:last-child {
-      border-bottom: none;
+    &:nth-child(1) {
+      border-left-color: v.$status-red;
+    }
+    
+    &:nth-child(2) {
+      border-left-color: v.$status-purple;
+    }
+    
+    &:nth-child(3) {
+      border-left-color: v.$status-purple;
     }
   }
 }
@@ -109,5 +125,51 @@ a {
 // Charts
 .chart-container {
   height: 300px;
-  margin-bottom: var.$spacing-lg;
+  margin-bottom: v.$spacing-lg;
+}
+
+// Toggle switch
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+    
+    &:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+  }
+  
+  input:checked + .slider {
+    background-color: v.$primary-color;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(20px);
+  }
 }

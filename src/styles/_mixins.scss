@@ -1,12 +1,12 @@
-@use './variables' as var;
-@use './breakpoints' as mix;
+@use 'variables' as v;
+@use 'breakpoints' as b;
 
 // Card styling
 @mixin card {
-  background-color: var.$card-bg;
+  background-color: v.$card-bg;
   border-radius: 8px;
-  box-shadow: var.$card-shadow;
-  padding: var.$spacing-md;
+  box-shadow: v.$card-shadow;
+  padding: v.$spacing-md;
 }
 
 // Flex utilities
@@ -42,7 +42,7 @@
   height: 100%;
   background-color: $color;
   border-radius: 4px;
-  margin-right: var.$spacing-sm;
+  margin-right: v.$spacing-sm;
 }
 
 // Truncate text with ellipsis
@@ -50,4 +50,25 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+// Tooltip
+@mixin tooltip {
+  position: relative;
+  
+  &:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: v.$spacing-xs v.$spacing-sm;
+    border-radius: 4px;
+    font-size: v.$font-size-small;
+    white-space: nowrap;
+    margin-left: v.$spacing-sm;
+    z-index: 1000;
+  }
 }

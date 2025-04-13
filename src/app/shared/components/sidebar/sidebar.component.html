@@ -1,0 +1,28 @@
+<div class="sidebar" [class.open]="isOpen()" [class.collapsed]="isCollapsed()">
+  <div class="sidebar-header">
+    <button class="close-btn" (click)="toggleSidebar()">
+      <span class="material-icons">close</span>
+    </button>
+  </div>
+  
+  <nav class="sidebar-nav">
+    <ul class="nav-list">
+      @for (item of menuItems; track item.label) {
+        <li class="nav-item">
+          <a [routerLink]="item.route" routerLinkActive="active" class="nav-link" [attr.data-tooltip]="item.label">
+            <span class="material-icons">{{ item.icon }}</span>
+            <span class="nav-label">{{ item.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+  
+  <div class="sidebar-footer">
+    <button class="collapse-btn" (click)="toggleCollapse()" *ngIf="!isOpen()">
+      <span class="material-icons">{{ isCollapsed() ? 'chevron_right' : 'chevron_left' }}</span>
+    </button>
+  </div>
+</div>
+
+<div class="sidebar-overlay" [class.visible]="isOpen()" (click)="closeSidebar()"></div>

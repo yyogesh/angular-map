@@ -1,0 +1,21 @@
+@use '../styles/variables' as vars;
+@use '../styles/breakpoints' as bp;
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.content-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.main-content {
+  padding: vars.$spacing-md;
+  
+  @include bp.respond-from(md) {
+    padding: vars.$spacing-lg;
+  }
+}

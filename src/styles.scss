@@ -94,7 +94,7 @@ a {
   overflow: hidden;
   
   @include b.respond-from(md) {
-    height: 400px;
+    height: 800px;
   }
 }
 

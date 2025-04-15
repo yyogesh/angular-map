@@ -1,0 +1,81 @@
+<!-- map-dashboard.component.html -->
+<div class="dashboard-container">
+    <!-- <div class="header">
+      <span class="last-updated">Last updated: {{ lastUpdated }}</span>
+    </div> -->
+    
+    <div class="content-area" [ngClass]="{'drawer-open': isDrawerOpen}">
+      <div class="map-container">
+        <div class="search-container">
+          <div class="search-input">
+            <i class="search-icon">🔍</i>
+            <div class="search-prompt">
+              <h4>What information would you like to see?</h4>
+              <p>i.e. show me all meters in the zip code 35207 with critical alerts for the past 24 hrs</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="map-filters">
+          <div class="filter-dropdown">
+            <select aria-label="alert type" [(ngModel)]="selectedAlertType">
+              <option *ngFor="let type of alertTypes" [value]="type.value">{{ type.label }}</option>
+            </select>
+          </div>
+          <div class="filter-dropdown">
+            <select aria-label="alert Duration" [(ngModel)]="selectedAlertDuration">
+              <option *ngFor="let duration of alertDurations" [value]="duration.value">{{ duration.label }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="map-image">
+          <!-- This will be replaced with an actual map component later -->
+          <img src="assets/map.png" alt="Map of Alabama, Mississippi, and Georgia with alerts">
+        </div>
+        
+        <!-- <div class="timeline-container">
+          <div class="timeline">
+            <div class="time-mark" *ngFor="let hour of [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2]">
+              {{ hour === 0 ? 'NOW' : (hour > 0 ? '+' + hour + 'hr' : hour + 'hrs') }}
+            </div>
+          </div>
+          <div class="timeline-slider">
+            <div class="slider-handle"></div>
+          </div>
+        </div> -->
+      </div>
+      
+      <div class="drawer-toggle" (click)="toggleDrawer()">
+        <div class="toggle-bar"></div>
+        <i class="toggle-icon">{{ isDrawerOpen ? '→' : '←' }}</i>
+      </div>
+      
+      <div class="drawer" [ngClass]="{'open': isDrawerOpen}">
+        <div class="drawer-content">
+          <div class="chart-container">
+            <!-- Placeholder for charts and data that will appear in the drawer -->
+            <h3>Alert Details</h3>
+            <div class="alert-stats">
+              <div class="stat-item">
+                <span class="stat-label">Total Alerts</span>
+                <span class="stat-value">24</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Critical</span>
+                <span class="stat-value">8</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Warning</span>
+                <span class="stat-value">16</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="action-container">
+            <button class="action-button">Take action</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

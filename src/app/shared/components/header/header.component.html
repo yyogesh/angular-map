@@ -1,0 +1,29 @@
+<header class="header">
+  <div class="header-left">
+    <button class="menu-btn" (click)="toggleSidebar()">
+      <span class="material-icons">menu</span>
+    </button>
+  </div>
+  
+  <!-- <div class="search-container">
+    <div class="search-input-wrapper">
+      <span class="material-icons search-icon">search</span>
+      <input 
+        type="text" 
+        class="search-input" 
+        placeholder="Search by zip code or address" 
+        [value]="searchQuery()" 
+        (input)="updateSearch($event)"
+      >
+    </div>
+  </div> -->
+  
+  <div class="header-right">
+    <div class="date-display">
+      {{ currentDate | date:'EEE, MMM d, yyyy, HH:mm' }}
+    </div>
+    <button class="notification-btn">
+      <span class="material-icons">notifications</span>
+    </button>
+  </div>
+</header>
